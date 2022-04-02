@@ -6,11 +6,11 @@ import gsap from 'gsap'
 const moveBrows = () => {
   const tl = gsap.timeline({ repeat: Infinity, repeatDelay: random(1.0, 4.0) })
   tl.to('.brow', {
-    y: random(-5, 5),
+    y: random(-7, 5),
     duration: random(0.2, 0.3),
-    delay: random(0.0, 3.0),
+    delay: random(0.1, 1.0),
   })
-  tl.to('.brow', { y: 0, duration: random(0.2, 0.3), delay: random(0.0, 3.5) })
+  tl.to('.brow', { y: 0, duration: random(0.2, 0.5), delay: random(0.0, 3.5) })
 }
 
 const lookAroundOne = () => {
@@ -54,8 +54,18 @@ const lookAroundTwo = () => {
   const tl = gsap.timeline({
     defaults: { duration: random(0.2, 0.5), ease: 'Power1.easeInOut' },
   })
-  tl.to('.pupil', { x: 0, y: 5, delay: 0.5 })
-  tl.to('.pupil', { x: 0, y: 0, delay: 1 })
+  tl.to('.pupil', {
+    x: 0,
+    y: 5,
+    delay: random(0.2, 1.0),
+    duration: random(0.4, 0.8),
+  })
+  tl.to('.pupil', {
+    x: 0,
+    y: 0,
+    delay: random(0.3, 1.4),
+    duration: random(0.3, 0.7),
+  })
   return tl
 }
 
@@ -68,27 +78,20 @@ const blink = (delay = 0) => {
   return tl
 }
 
-const makeAnimation = (tl: gsap.core.Timeline) => {
-  tl.add(blink(1))
-    .add(lookAroundOne())
-    .add(blink())
-    .add(lookAroundTwo())
-    .add(blink())
-    .add(blink(2))
-}
-
 export const Face = () => {
   useEffect(() => {
     const masterTl = gsap.timeline({
       repeatDelay: 3,
-      onComplete: () => {
-        masterTl.clear()
-        makeAnimation(masterTl)
-        masterTl.restart()
-      },
+      repeat: Infinity,
     })
     moveBrows()
-    makeAnimation(masterTl)
+    masterTl
+      .add(blink(1))
+      .add(lookAroundOne())
+      .add(blink())
+      .add(lookAroundTwo())
+      .add(blink())
+      .add(blink(2))
   }, [])
   return (
     <>
@@ -96,45 +99,45 @@ export const Face = () => {
         id="headFill"
         cx="61.8"
         cy="61.8"
-        r="55"
+        r="47.7"
         fill="#27aae1"
-        opacity="0.5"
+        opacity="0.75"
       />
       <circle
         className="eyeOpen"
-        cx="93.5"
+        cx="89.3"
         cy="61.9"
-        r="20.9"
+        r="18.1"
         fill="#fff"
         stroke="#231f20"
         strokeMiterlimit="10"
       />
       <circle
         className={classNames('eyeOpen', 'pupil')}
-        cx="93.5"
+        cx="89.3"
         cy="61.9"
-        r="14.8"
+        r="12.8"
         fill="#231f20"
       />
       <circle
         className="eyeOpen"
-        cx="30.6"
+        cx="34.8"
         cy="61.9"
-        r="20.9"
+        r="18.1"
         fill="#fff"
         stroke="#231f20"
         strokeMiterlimit="10"
       />
       <circle
         className={classNames('eyeOpen', 'pupil')}
-        cx="30.6"
+        cx="34.8"
         cy="61.9"
-        r="14.8"
+        r="12.8"
         fill="#231f20"
       />
       <path
         className="eyeClosed"
-        d="M72.6,61.9a20.9,20.9,0,0,1,41.8,0"
+        d="M71.2,61.9a18.1,18.1,0,0,1,36.2,0"
         fill="none"
         stroke="#231f20"
         strokeLinecap="round"
@@ -144,7 +147,7 @@ export const Face = () => {
       />
       <path
         className="eyeClosed"
-        d="M9.8,61.9a20.9,20.9,0,1,1,41.7,0"
+        d="M16.6,61.9a18.2,18.2,0,0,1,36.3,0"
         fill="none"
         stroke="#231f20"
         strokeLinecap="round"
@@ -154,7 +157,7 @@ export const Face = () => {
       />
       <path
         className={classNames('brow', 'browUp')}
-        d="M87.3,32.5s-5.8-6.7-12.6,0"
+        d="M84,36.3s-5.1-5.8-11,0"
         fill="none"
         stroke="#231f20"
         strokeLinecap="round"
@@ -163,7 +166,7 @@ export const Face = () => {
       />
       <path
         className={classNames('brow', 'browUp')}
-        d="M49.5,31.5s-5.8-6.7-12.7,0"
+        d="M51.1,35.5s-5-5.8-11,0"
         fill="none"
         stroke="#231f20"
         strokeLinecap="round"
@@ -172,7 +175,7 @@ export const Face = () => {
       />
       <path
         id="mouth"
-        d="M53.1,86.2s8,9.2,17.5,0"
+        d="M54.3,82.9s6.9,8,15.1,0"
         fill="none"
         stroke="#231f20"
         strokeLinecap="round"
