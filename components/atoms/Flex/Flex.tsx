@@ -3,6 +3,7 @@ import { space, TSpace } from '../../../styles/space'
 interface Props {
   alignItems?: 'flex-start' | 'center'
   justifyContent?: 'flex-start' | 'center'
+  flexDirection?: 'row' | 'column'
   gap?: TSpace
 }
 
@@ -11,6 +12,7 @@ const Flex: React.FC<Props> = ({
   alignItems,
   justifyContent,
   gap,
+  flexDirection,
 }) => {
   return (
     <>
@@ -23,6 +25,7 @@ const Flex: React.FC<Props> = ({
         align-items: ${alignItems};
         justify-content: ${justifyContent};
         gap: ${space[gap]}px;
+        flex-direction: ${flexDirection};
       `}</style>
     </>
   )
@@ -31,6 +34,7 @@ const Flex: React.FC<Props> = ({
 Flex.defaultProps = {
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
+  flexDirection: 'row',
   gap: 0,
 }
 
