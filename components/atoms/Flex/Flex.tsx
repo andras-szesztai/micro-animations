@@ -1,5 +1,5 @@
 import { AriaAttributes, HTMLAttributes } from 'react'
-import { space, TSpace } from '../../../styles/space'
+import { space, TSpace } from '@/styles/space'
 
 interface Props extends HTMLAttributes<AriaAttributes> {
   alignItems?: 'flex-start' | 'center'
