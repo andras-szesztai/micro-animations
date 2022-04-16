@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import { RadioButton } from '@/components/molecules/RadioButton/RadioButton'
-import { RadioGroup } from '@/components/atoms/RadioGroup/RadioGroup'
+import { RadioButton } from '@/components/molecules/RadioButton'
+import { RadioGroup } from '@/components/atoms/RadioGroup'
+import { Flex } from '@/components/atoms/Flex'
 
 import { space } from '@/styles/space'
 
@@ -10,11 +11,13 @@ const LikeButtonPage = () => {
   return (
     <>
       <div className="fullScreen">
-        <RadioGroup labeledById="ElevatorOne">
-          <RadioButton selected={index} index={0} setSelected={setIndex} />
-          <RadioButton selected={index} index={1} setSelected={setIndex} />
-          <RadioButton selected={index} index={2} setSelected={setIndex} />
-        </RadioGroup>
+        <Flex width="240px">
+          <RadioGroup labeledById="ElevatorOne">
+            <RadioButton selected={index} index={0} setSelected={setIndex} />
+            <RadioButton selected={index} index={1} setSelected={setIndex} />
+            <RadioButton selected={index} index={2} setSelected={setIndex} />
+          </RadioGroup>
+        </Flex>
       </div>
       <style jsx>{`
         button {

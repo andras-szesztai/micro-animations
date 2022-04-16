@@ -5,6 +5,8 @@ interface Props extends HTMLAttributes<AriaAttributes> {
   alignItems?: 'flex-start' | 'center'
   justifyContent?: 'flex-start' | 'center'
   flexDirection?: 'row' | 'column'
+  width?: string
+  height?: string
   gap?: TSpace
 }
 
@@ -14,13 +16,15 @@ const Flex: React.FC<Props> = ({
   justifyContent,
   gap,
   flexDirection,
+  width,
+  height,
 }) => (
   <>
     <div>{children}</div>
     <style jsx>{`
       position: relative;
-      width: 100%;
-      height: 100%;
+      width: ${width};
+      height: ${height};
       display: flex;
       align-items: ${alignItems};
       justify-content: ${justifyContent};
@@ -35,6 +39,8 @@ Flex.defaultProps = {
   justifyContent: 'flex-start',
   flexDirection: 'row',
   gap: 0,
+  width: '100%',
+  height: '100%',
 }
 
 export default Flex

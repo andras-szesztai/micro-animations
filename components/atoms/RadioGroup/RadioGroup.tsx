@@ -6,7 +6,7 @@ interface Props {
   labeledById: string
 }
 
-export const RadioGroup: FC<Props> = ({ children, labeledById }) => (
+const RadioGroup: FC<Props> = ({ children, labeledById }) => (
   <Flex
     alignItems="center"
     justifyContent="center"
@@ -18,3 +18,5 @@ export const RadioGroup: FC<Props> = ({ children, labeledById }) => (
     {children}
   </Flex>
 )
+
+export default RadioGroup
