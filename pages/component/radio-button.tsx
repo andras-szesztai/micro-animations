@@ -11,7 +11,7 @@ const LikeButtonPage = () => {
   return (
     <>
       <div className="fullScreen">
-        <Flex width="240px">
+        <Flex width="240px" alignItems="center">
           <RadioGroup labeledById="ElevatorOne">
             <RadioButton selected={index} index={0} setSelected={setIndex} />
             <RadioButton selected={index} index={1} setSelected={setIndex} />

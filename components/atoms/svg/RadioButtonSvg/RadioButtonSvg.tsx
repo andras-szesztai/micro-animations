@@ -7,16 +7,17 @@ import Face from './Face'
 interface Props {
   selected: number
   index: number
+  dim: number
 }
 
 export type Status = 'face' | 'door' | 'transition'
 
-const RadioButtonSvg = ({ index, selected }: Props) => {
+const RadioButtonSvg = ({ index, selected, dim }: Props) => {
   const [status, setStatus] = useState<Status>('door')
   const prevSelected = usePrevious(selected)
   const isSelected = selected === index
   return (
-    <svg width={36} viewBox="0 0 123.7 123.7">
+    <svg width={dim} viewBox="0 0 123.7 123.7">
       <defs>
         <clipPath id="clip-path">
           <circle cx="61.8" cy="61.8" r="58" fill="none" />
