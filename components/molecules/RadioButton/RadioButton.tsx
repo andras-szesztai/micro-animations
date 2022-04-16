@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useRef } from 'react'
 import { isUndefined } from 'lodash'
 
 import { Flex } from '@components/atoms/Flex'
@@ -50,30 +50,48 @@ const RadioButton = ({
   const currDim = dim[variant]
   const isSelected = selected === index
   const tabIndex = getTabIndex(index, selected)
+  const divRef = useRef<HTMLDivElement>(null)
   return (
-    <div
-      role="radio"
-      tabIndex={tabIndex}
-      onClick={() => {
-        setSelected(index)
-      }}
-      onKeyPress={(key) => {
-        if (key.code.toLowerCase() === 'space') {
+    <>
+      <div
+        ref={divRef}
+        role="radio"
+        className="radio-container"
+        tabIndex={tabIndex}
+        onClick={() => {
           setSelected(index)
+        }}
+        onKeyDown={({ code }) => {
+          if (document.activeElement === divRef.current) {
+            if (code.match(/space/i)) {
+              setSelected(index)
+            }
+            if (code.match(/arrowleft|arrowup/i)) {
+              setSelected((prev) => (prev === 0 ? 2 : prev - 1))
+            }
+            if (code.match(/arrowright|arrowdown/i)) {
+              setSelected((prev) => (prev === 2 ? 0 : prev + 1))
+            }
+          }
+        }}
+        aria-checked={isSelected}
+      >
+        <Flex alignItems="center" gap={gap[variant]} height={`${currDim}px`}>
+          <RadioButtonSvg
+            index={index}
+            selected={selected}
+            isSelected={isSelected}
+            dim={currDim}
+          />
+          <Label text={label} size={fontSizes[variant]} />
+        </Flex>
+      </div>
+      <style jsx>{`
+        .radio-container {
+          width: 100%;
         }
-      }}
-      aria-checked={isSelected}
-    >
-      <Flex alignItems="center" gap={gap[variant]} height={`${currDim}px`}>
-        <RadioButtonSvg
-          index={index}
-          selected={selected}
-          isSelected={isSelected}
-          dim={currDim}
-        />
-        <Label text={label} size={fontSizes[variant]} />
-      </Flex>
-    </div>
+      `}</style>
+    </>
   )
 }
 
