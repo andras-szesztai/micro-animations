@@ -1,24 +1,20 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 
-import { Flex } from '../../components/atoms/Flex'
-import { space } from '../../styles/space'
-import { RadioButton } from '../../components/atoms/svg/RadioButton/RadioButton'
+import { RadioButton } from '../../components/atoms/RadioButton/RadioButton'
+import { RadioGroup } from '../../components/atoms/RadioGroup/RadioGroup'
+
+import { space } from 'styles/space'
 
 const LikeButtonPage = () => {
   const [index, setIndex] = useState(0)
   return (
     <>
       <div className="fullScreen">
-        <Flex
-          alignItems="center"
-          justifyContent="center"
-          flexDirection="column"
-          gap={2}
-        >
+        <RadioGroup labeledById="ElevatorOne">
           <RadioButton selected={index} index={0} setSelected={setIndex} />
           <RadioButton selected={index} index={1} setSelected={setIndex} />
           <RadioButton selected={index} index={2} setSelected={setIndex} />
-        </Flex>
+        </RadioGroup>
       </div>
       <style jsx>{`
         button {

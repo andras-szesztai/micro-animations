@@ -2,7 +2,7 @@ import gsap from 'gsap'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { usePrevious } from 'react-use'
 
-import { Status } from './RadioButton'
+import { Status } from '../../RadioButton/RadioButton'
 
 interface Props {
   isSelected: boolean
@@ -47,8 +47,16 @@ export const Door = ({ type, isSelected, setStatus, status }: Props) => {
         duration: 0.2,
         delay: 1,
       })
-      gsap.to(rightDoorRef.current, { x: '100%', delay: 1.25 })
-      gsap.to(leftDoorRef.current, { x: '-100%', delay: 1.25 })
+      gsap.to(rightDoorRef.current, {
+        x: '100%',
+        delay: 1.25,
+        ease: 'Bounce.easeOut',
+      })
+      gsap.to(leftDoorRef.current, {
+        x: '-100%',
+        delay: 1.25,
+        ease: 'Bounce.easeOut',
+      })
     }
     if (prevIsSelected && !isSelected) {
       gsap.to(rightDoorRef.current, { x: 0, ease: 'Bounce.easeOut' })

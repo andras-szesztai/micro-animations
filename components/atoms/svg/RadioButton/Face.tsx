@@ -18,7 +18,7 @@ const lookAroundOne = () => {
     defaults: { ease: 'Power1.easeInOut' },
   })
   tl.to('.pupil', {
-    x: 5,
+    x: 4,
     y: 0,
     delay: random(0.1, 0.5),
     duration: random(0.2, 0.6),
@@ -26,25 +26,25 @@ const lookAroundOne = () => {
   tl.to('.pupil', {
     x: 0,
     y: 0,
-    delay: random(0.0, 1.0),
+    delay: random(0.0, 2.0),
     duration: random(0.3, 0.5),
   })
   tl.to('.pupil', {
     x: -3,
     y: -3,
-    delay: random(0.2, 1.2),
+    delay: random(0.2, 3.0),
     duration: random(0.4, 0.7),
   })
   tl.to('.pupil', {
     x: 0,
-    y: -5,
-    delay: random(0.2, 0.9),
+    y: -4,
+    delay: random(0.2, 2.0),
     duration: random(0.2, 0.4),
   })
   tl.to('.pupil', {
     x: 0,
     y: 0,
-    delay: random(0.4, 1.6),
+    delay: random(0.4, 2.5),
     duration: random(0.5, 0.8),
   })
   return tl
@@ -56,14 +56,14 @@ const lookAroundTwo = () => {
   })
   tl.to('.pupil', {
     x: 0,
-    y: 5,
-    delay: random(0.2, 1.0),
+    y: 4,
+    delay: random(0.2, 3.0),
     duration: random(0.4, 0.8),
   })
   tl.to('.pupil', {
     x: 0,
     y: 0,
-    delay: random(0.3, 1.4),
+    delay: random(0.3, 2.5),
     duration: random(0.3, 0.7),
   })
   return tl
@@ -86,7 +86,7 @@ export const Face = () => {
     })
     moveBrows()
     masterTl
-      .add(blink(1))
+      .add(blink(2))
       .add(lookAroundOne())
       .add(blink())
       .add(lookAroundTwo())
@@ -116,7 +116,7 @@ export const Face = () => {
         className={classNames('eyeOpen', 'pupil')}
         cx="89.3"
         cy="61.9"
-        r="12.8"
+        r="12"
         fill="#231f20"
       />
       <circle
@@ -132,7 +132,7 @@ export const Face = () => {
         className={classNames('eyeOpen', 'pupil')}
         cx="34.8"
         cy="61.9"
-        r="12.8"
+        r="12"
         fill="#231f20"
       />
       <path

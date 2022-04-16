@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { usePrevious } from 'react-use'
-import { Door } from './Door'
-import { Face } from './Face'
+import { Door } from '../svg/RadioButton/Door'
+import { Face } from '../svg/RadioButton/Face'
 
 interface Props {
   setSelected: Dispatch<SetStateAction<number>>
@@ -21,7 +21,7 @@ export const RadioButton = ({ selected, setSelected, index }: Props) => {
         setSelected(index)
       }}
     >
-      <svg width={40} viewBox="0 0 123.7 123.7">
+      <svg width={36} viewBox="0 0 123.7 123.7">
         <defs>
           <clipPath id="clip-path">
             <circle cx="61.8" cy="61.8" r="58" fill="none" />
