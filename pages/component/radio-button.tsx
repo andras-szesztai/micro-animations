@@ -1,9 +1,9 @@
 import { FC, useState } from 'react'
 
-import { RadioButton } from '../../components/atoms/RadioButton/RadioButton'
+import { RadioButton } from '../../components/molecules/RadioButton/RadioButton'
 import { RadioGroup } from '../../components/atoms/RadioGroup/RadioGroup'
 
-import { space } from 'styles/space'
+import { space } from '../../styles/space'
 
 const LikeButtonPage = () => {
   const [index, setIndex] = useState(0)
@@ -15,6 +15,7 @@ const LikeButtonPage = () => {
           <RadioButton selected={index} index={1} setSelected={setIndex} />
           <RadioButton selected={index} index={2} setSelected={setIndex} />
         </RadioGroup>
+        <div>Helllo</div>
       </div>
       <style jsx>{`
         button {

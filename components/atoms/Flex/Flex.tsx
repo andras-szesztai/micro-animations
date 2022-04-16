@@ -14,23 +14,21 @@ const Flex: React.FC<Props> = ({
   justifyContent,
   gap,
   flexDirection,
-}) => {
-  return (
-    <>
-      <div>{children}</div>
-      <style jsx>{`
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: ${alignItems};
-        justify-content: ${justifyContent};
-        gap: ${space[gap]}px;
-        flex-direction: ${flexDirection};
-      `}</style>
-    </>
-  )
-}
+}) => (
+  <>
+    <div>{children}</div>
+    <style jsx>{`
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: ${alignItems};
+      justify-content: ${justifyContent};
+      gap: ${space[gap]}px;
+      flex-direction: ${flexDirection};
+    `}</style>
+  </>
+)
 
 Flex.defaultProps = {
   alignItems: 'flex-start',

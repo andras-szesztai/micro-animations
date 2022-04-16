@@ -78,7 +78,7 @@ const blink = (delay = 0) => {
   return tl
 }
 
-export const Face = () => {
+const Face = () => {
   useEffect(() => {
     const masterTl = gsap.timeline({
       repeatDelay: 3,
@@ -185,3 +185,5 @@ export const Face = () => {
     </>
   )
 }
+
+export default Face

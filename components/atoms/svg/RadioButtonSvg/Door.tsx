@@ -1,8 +1,7 @@
 import gsap from 'gsap'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { usePrevious } from 'react-use'
-
-import { Status } from '../../RadioButton/RadioButton'
+import { Status } from './RadioButtonSvg'
 
 interface Props {
   isSelected: boolean
@@ -11,8 +10,7 @@ interface Props {
   status: Status
 }
 
-export const Door = ({ type, isSelected, setStatus, status }: Props) => {
-  const prevType = usePrevious(type)
+const Door = ({ type, isSelected, setStatus, status }: Props) => {
   const prevIsSelected = usePrevious(isSelected)
   const buttonUpRef = useRef<SVGPolygonElement>(null)
   const buttonDownRef = useRef<SVGPolygonElement>(null)
@@ -112,3 +110,5 @@ export const Door = ({ type, isSelected, setStatus, status }: Props) => {
     </>
   )
 }
+
+export default Door
