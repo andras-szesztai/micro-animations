@@ -4,18 +4,18 @@ import { usePrevious } from 'react-use'
 import Door from './Door'
 import Face from './Face'
 
+import { Status } from './type'
+
 interface Props {
   selected: number
   index: number
   dim: number
+  isSelected: boolean
 }
 
-export type Status = 'face' | 'door' | 'transition'
-
-const RadioButtonSvg = ({ index, selected, dim }: Props) => {
+const RadioButtonSvg = ({ index, selected, dim, isSelected }: Props) => {
   const [status, setStatus] = useState<Status>('door')
   const prevSelected = usePrevious(selected)
-  const isSelected = selected === index
   return (
     <svg width={dim} viewBox="0 0 123.7 123.7">
       <defs>

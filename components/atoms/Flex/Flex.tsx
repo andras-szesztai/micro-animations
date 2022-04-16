@@ -1,7 +1,7 @@
-import { AriaAttributes, HTMLAttributes } from 'react'
-import { space, TSpace } from '@/styles/space'
+import { FC } from 'react'
+import { space, TSpace } from '@styles/space'
 
-interface Props extends HTMLAttributes<AriaAttributes> {
+interface Props {
   alignItems?: 'flex-start' | 'center'
   justifyContent?: 'flex-start' | 'center'
   flexDirection?: 'row' | 'column'
@@ -10,7 +10,7 @@ interface Props extends HTMLAttributes<AriaAttributes> {
   gap?: TSpace
 }
 
-const Flex: React.FC<Props> = ({
+const Flex: FC<Props> = ({
   children,
   alignItems,
   justifyContent,

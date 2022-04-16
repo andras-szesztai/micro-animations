@@ -1,7 +1,8 @@
 import gsap from 'gsap'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { usePrevious } from 'react-use'
-import { Status } from './RadioButtonSvg'
+
+import { Status } from './type'
 
 interface Props {
   isSelected: boolean
@@ -16,11 +17,12 @@ const Door = ({ type, isSelected, setStatus, status }: Props) => {
   const buttonDownRef = useRef<SVGPolygonElement>(null)
   const leftDoorRef = useRef<SVGRectElement>(null)
   const rightDoorRef = useRef<SVGGElement>(null)
-  const buttonTypes = {
-    up: buttonUpRef.current,
-    down: buttonDownRef.current,
-  }
+
   useEffect(() => {
+    const buttonTypes = {
+      up: buttonUpRef.current,
+      down: buttonDownRef.current,
+    }
     if (!prevIsSelected && isSelected) {
       gsap.to(buttonTypes[type], {
         fill: '#FFF200',
@@ -36,7 +38,7 @@ const Door = ({ type, isSelected, setStatus, status }: Props) => {
         duration: 0.2,
       })
     }
-  }, [prevIsSelected, isSelected, type])
+  }, [prevIsSelected, isSelected, type, setStatus])
 
   useEffect(() => {
     if (isSelected && status === 'transition') {
@@ -66,7 +68,7 @@ const Door = ({ type, isSelected, setStatus, status }: Props) => {
         },
       })
     }
-  }, [isSelected, status, prevIsSelected])
+  }, [isSelected, status, prevIsSelected, setStatus])
 
   return (
     <>

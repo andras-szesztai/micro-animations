@@ -1,15 +1,17 @@
 import { Dispatch, SetStateAction } from 'react'
+import { isUndefined } from 'lodash'
 
-import { Flex } from '@/components/atoms/Flex'
-import { Label } from '@/components/atoms/Label'
-import RadioButtonSvg from '@/components/atoms/svg/RadioButtonSvg/RadioButtonSvg'
-import { space } from '@/styles/space'
+import { Flex } from '@components/atoms/Flex'
+import { Label } from '@components/atoms/Label'
+import { RadioButtonSvg } from '@components/atoms/svg/RadioButtonSvg'
 
 type Variant = 'sm' | 'md' | 'lg'
+
 interface Props {
   setSelected: Dispatch<SetStateAction<number>>
   selected: number
   index: number
+  label: string
   variant?: Variant
 }
 
@@ -27,24 +29,51 @@ const dim = {
 
 const fontSizes = {
   sm: 75,
-  md: 100,
+  md: 125,
   lg: 150,
 } as const
 
-const RadioButton = ({ selected, setSelected, index, variant }: Props) => {
+const getTabIndex = (index: number, selected?: number) => {
+  if (isUndefined(selected)) {
+    return index === 0 ? 0 : -1
+  }
+  return selected === index ? 0 : -1
+}
+
+const RadioButton = ({
+  selected,
+  setSelected,
+  index,
+  variant,
+  label,
+}: Props) => {
   const currDim = dim[variant]
+  const isSelected = selected === index
+  const tabIndex = getTabIndex(index, selected)
   return (
-    <Flex
+    <div
+      role="radio"
+      tabIndex={tabIndex}
       onClick={() => {
         setSelected(index)
       }}
-      alignItems="center"
-      gap={gap[variant]}
-      height={`${currDim}px`}
+      onKeyPress={(key) => {
+        if (key.code.toLowerCase() === 'space') {
+          setSelected(index)
+        }
+      }}
+      aria-checked={isSelected}
     >
-      <RadioButtonSvg index={index} selected={selected} dim={currDim} />
-      <Label text="Radio button" size={fontSizes[variant]} />
-    </Flex>
+      <Flex alignItems="center" gap={gap[variant]} height={`${currDim}px`}>
+        <RadioButtonSvg
+          index={index}
+          selected={selected}
+          isSelected={isSelected}
+          dim={currDim}
+        />
+        <Label text={label} size={fontSizes[variant]} />
+      </Flex>
+    </div>
   )
 }
 

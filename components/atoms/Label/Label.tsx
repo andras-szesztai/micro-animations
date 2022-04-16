@@ -1,5 +1,5 @@
-import { fontSize } from '@/styles/fontSize'
-import { fontWeight } from '@/styles/fontWeight'
+import { fontSize } from '@styles/fontSize'
+import { fontWeight } from '@styles/fontWeight'
 
 interface Props {
   text: string
