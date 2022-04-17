@@ -1,5 +1,5 @@
-import { radioButtonColor } from '@styles/colors'
 import { FC } from 'react'
+import { radioButtonColor } from '@styles/colors'
 
 import { Flex } from '../Flex'
 import { Title } from '../Title'

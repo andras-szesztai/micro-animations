@@ -6,7 +6,7 @@ import { RadioButtonSvg } from '@components/atoms/svg/RadioButtonSvg'
 import { space } from '@styles/space'
 import { radioButtonColor } from '@styles/colors'
 
-import { getTabIndex } from './utils'
+import { getTabIndex, makeId } from './utils'
 import { Props } from './types'
 import { gap, dim, fontSize } from './styles'
 
@@ -58,6 +58,7 @@ const RadioButton = ({
             selected={selected}
             isSelected={isSelected}
             dim={currDim}
+            id={makeId(label)}
           />
           <Label
             text={label}

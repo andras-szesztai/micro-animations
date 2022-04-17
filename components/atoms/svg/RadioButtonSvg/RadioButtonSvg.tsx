@@ -12,19 +12,20 @@ interface Props {
   index: number
   dim: number
   isSelected: boolean
+  id: string
 }
 
-const RadioButtonSvg = ({ index, selected, dim, isSelected }: Props) => {
+const RadioButtonSvg = ({ index, selected, dim, isSelected, id }: Props) => {
   const [status, setStatus] = useState<Status>('door')
   const prevSelected = usePrevious(selected)
   return (
     <svg width={dim} height={dim} viewBox="0 0 123.7 123.7">
       <defs>
-        <clipPath id="clip-path">
+        <clipPath id={`${id}-clip-path`}>
           <circle cx="61.8" cy="61.8" r="58" fill="none" />
         </clipPath>
       </defs>
-      <g clipPath="url(#clip-path)">
+      <g clipPath={`url(#${id}-clip-path)`}>
         {(status === 'face' || status === 'transition') && <Face />}
         {(status === 'door' || status === 'transition') && (
           <Door
@@ -35,17 +36,15 @@ const RadioButtonSvg = ({ index, selected, dim, isSelected }: Props) => {
           />
         )}
       </g>
-      <g id="Container">
-        <circle
-          cx="61.8"
-          cy="61.8"
-          r="58"
-          fill="none"
-          stroke={radioButtonColor.black}
-          strokeMiterlimit="10"
-          strokeWidth="5"
-        />
-      </g>
+      <circle
+        cx="61.8"
+        cy="61.8"
+        r="58"
+        fill="none"
+        stroke={radioButtonColor.black}
+        strokeMiterlimit="10"
+        strokeWidth="5"
+      />
     </svg>
   )
 }
