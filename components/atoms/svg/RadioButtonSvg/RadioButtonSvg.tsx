@@ -1,23 +1,29 @@
+import { Dispatch, SetStateAction } from 'react'
+
 import { radioButtonColor } from '@styles/colors'
-import { useState } from 'react'
-import { usePrevious } from 'react-use'
 
 import Door from './Door'
 import Face from './Face'
 
-import { Status } from './type'
-
 interface Props {
-  selected: number
+  active: number
   index: number
   dim: number
-  isSelected: boolean
+  isCalled: boolean
+  isActive: boolean
+  setActive: Dispatch<SetStateAction<number>>
   id: string
 }
 
-const RadioButtonSvg = ({ index, selected, dim, isSelected, id }: Props) => {
-  const [status, setStatus] = useState<Status>('door')
-  const prevSelected = usePrevious(selected)
+const RadioButtonSvg = ({
+  index,
+  active,
+  dim,
+  isCalled,
+  id,
+  isActive,
+  setActive,
+}: Props) => {
   return (
     <svg width={dim} height={dim} viewBox="0 0 123.7 123.7">
       <defs>
@@ -26,15 +32,14 @@ const RadioButtonSvg = ({ index, selected, dim, isSelected, id }: Props) => {
         </clipPath>
       </defs>
       <g clipPath={`url(#${id}-clip-path)`}>
-        {(status === 'face' || status === 'transition') && <Face />}
-        {(status === 'door' || status === 'transition') && (
-          <Door
-            type={prevSelected < index ? 'down' : 'up'}
-            isSelected={isSelected}
-            setStatus={setStatus}
-            status={status}
-          />
-        )}
+        {(isCalled || isActive) && <Face />}
+        <Door
+          active={active}
+          isCalled={isCalled}
+          isActive={isActive}
+          setActive={setActive}
+          index={index}
+        />
       </g>
       <circle
         cx="61.8"

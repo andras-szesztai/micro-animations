@@ -1,78 +1,76 @@
-import gsap from 'gsap'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { usePrevious } from 'react-use'
+import gsap from 'gsap'
 
 import { radioButtonColor } from '@styles/colors'
-
-import { Status } from './type'
 
 const { accent, neutral200, neutral100 } = radioButtonColor
 
 interface Props {
-  isSelected: boolean
-  type: 'up' | 'down'
-  setStatus: Dispatch<SetStateAction<Status>>
-  status: Status
+  isCalled: boolean
+  isActive: boolean
+  index: number
+  setActive: Dispatch<SetStateAction<number>>
+  active: number
 }
 
-const Door = ({ type, isSelected, setStatus, status }: Props) => {
-  const prevIsSelected = usePrevious(isSelected)
+const Door = ({ isCalled, setActive, index, isActive, active }: Props) => {
+  const prevActive = usePrevious(active)
+  const type = prevActive < index ? 'down' : 'up'
   const buttonUpRef = useRef<SVGPolygonElement>(null)
   const buttonDownRef = useRef<SVGPolygonElement>(null)
   const leftDoorRef = useRef<SVGRectElement>(null)
   const rightDoorRef = useRef<SVGGElement>(null)
 
+  // Call elevator
   useEffect(() => {
-    const buttonTypes = {
-      up: buttonUpRef.current,
-      down: buttonDownRef.current,
-    }
-    if (!prevIsSelected && isSelected) {
-      gsap.to(buttonTypes[type], {
+    const tl = gsap.timeline()
+    if (isCalled) {
+      const button = type === 'up' ? buttonUpRef.current : buttonDownRef.current
+      tl.to(button, {
         fill: accent,
         duration: 0.2,
-        onComplete: () => {
-          setStatus('transition')
+      }).to(
+        button,
+        {
+          fill: neutral200,
+          duration: 0.2,
+          onComplete: () => {
+            setActive(index)
+          },
         },
-      })
-    }
-    if (prevIsSelected && !isSelected) {
-      gsap.to([buttonUpRef.current, buttonDownRef.current], {
+        '+.5'
+      )
+    } else {
+      tl.to([buttonUpRef.current, buttonDownRef.current], {
         fill: neutral200,
         duration: 0.2,
       })
     }
-  }, [prevIsSelected, isSelected, type, setStatus])
+  }, [isCalled, type, setActive, index])
 
   useEffect(() => {
-    if (isSelected && status === 'transition') {
-      gsap.to([buttonUpRef.current, buttonDownRef.current], {
-        fill: neutral200,
-        duration: 0.2,
-        delay: 1,
-      })
+    if (isCalled && isActive) {
       gsap.to(rightDoorRef.current, {
         x: '100%',
-        delay: 1.25,
         ease: 'Bounce.easeOut',
       })
       gsap.to(leftDoorRef.current, {
         x: '-100%',
-        delay: 1.25,
         ease: 'Bounce.easeOut',
       })
     }
-    if (prevIsSelected && !isSelected) {
-      gsap.to(rightDoorRef.current, { x: 0, ease: 'Bounce.easeOut' })
+    if ((isActive && !isCalled) || (!isActive && !isCalled)) {
+      gsap.to(rightDoorRef.current, {
+        x: 0,
+        ease: 'Bounce.easeOut',
+      })
       gsap.to(leftDoorRef.current, {
         x: 0,
         ease: 'Bounce.easeOut',
-        onComplete: () => {
-          setStatus('door')
-        },
       })
     }
-  }, [isSelected, status, prevIsSelected, setStatus])
+  }, [isActive, isCalled, index])
 
   return (
     <>

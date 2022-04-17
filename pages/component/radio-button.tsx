@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-import { RadioButton } from '@components/molecules/RadioButton'
-import { RadioGroup } from '@components/atoms/RadioGroup'
+import { RadioGroup } from '@components/organisms/RadioGroup'
 import { Flex } from '@components/atoms/Flex'
 
 import { space } from '@styles/space'
@@ -18,50 +17,20 @@ const firstRadios = [
   },
 ]
 
-const secondRadios = [
-  {
-    label: '3rd floor',
-  },
-  {
-    label: '2nd floor',
-  },
-  {
-    label: '1st floor',
-  },
-]
-
-// TODO
-// Figure out bug when changing quickly
-
-const LikeButtonPage = () => {
-  const [firstGroupIndex, setFirstGroupIndex] = useState<number>(undefined)
-  const [secondGroupIndex, setSecondGroupIndex] = useState<number>(undefined)
+const RadioButtonPage = () => {
+  const [, setSelected] = useState<string | undefined>(undefined)
   return (
     <>
       <div className="fullScreen">
         <Flex width="400px" alignItems="center" gap={4}>
-          <RadioGroup labeledById="ElevatorOne">
-            {firstRadios.map(({ label }, i) => (
-              <RadioButton
-                key={label}
-                label={label}
-                index={i}
-                selected={firstGroupIndex}
-                setSelected={setFirstGroupIndex}
-              />
-            ))}
-          </RadioGroup>
-          <RadioGroup labeledById="ElevatorTwo">
-            {secondRadios.map(({ label }, i) => (
-              <RadioButton
-                key={label}
-                label={label}
-                index={i}
-                selected={secondGroupIndex}
-                setSelected={setSecondGroupIndex}
-              />
-            ))}
-          </RadioGroup>
+          <RadioGroup
+            labeledById="ElevatorOne"
+            title="Select a floor"
+            options={firstRadios}
+            onChange={(index) => {
+              setSelected(index)
+            }}
+          />
         </Flex>
       </div>
       <style jsx>{`
@@ -84,4 +53,4 @@ const LikeButtonPage = () => {
   )
 }
 
-export default LikeButtonPage
+export default RadioButtonPage

@@ -1,4 +1,10 @@
-import { KeyboardEvent, useEffect, useRef } from 'react'
+import {
+  KeyboardEvent,
+  useEffect,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from 'react'
 
 import { Flex } from '@components/atoms/Flex'
 import { Label } from '@components/atoms/Label'
@@ -7,35 +13,49 @@ import { space } from '@styles/space'
 import { radioButtonColor } from '@styles/colors'
 
 import { getTabIndex, makeId } from './utils'
-import { Props } from './types'
 import { gap, dim, fontSize } from './styles'
 
+type Variant = 'sm' | 'md' | 'lg'
+
+export interface Props {
+  active: number
+  setActive: Dispatch<SetStateAction<number>>
+  called: number
+  setCalled: Dispatch<SetStateAction<number>>
+  index: number
+  label: string
+  variant?: Variant
+}
+
 const RadioButton = ({
-  selected,
-  setSelected,
+  called,
+  setCalled,
+  active,
+  setActive,
   index,
   variant,
   label,
 }: Props) => {
   const currDim = dim[variant]
-  const isSelected = selected === index
-  const tabIndex = getTabIndex(index, selected)
+  const isActive = active === index
+  const isCalled = called === index
+  const tabIndex = getTabIndex(index, active)
   const divRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    if (isSelected) {
+    if (isCalled) {
       divRef.current.focus()
     }
-  }, [isSelected])
+  }, [isCalled])
   const handleKeyDown = ({ code }: KeyboardEvent) => {
     if (document.activeElement === divRef.current) {
       if (code.match(/space/i)) {
-        setSelected(index)
+        setCalled(index)
       }
       if (code.match(/arrowleft|arrowup/i)) {
-        setSelected((prev) => (!prev ? 2 : (prev || 0) - 1))
+        setCalled((prev) => (!prev ? 2 : (prev || 0) - 1))
       }
       if (code.match(/arrowright|arrowdown/i)) {
-        setSelected((prev) => (prev === 2 ? 0 : (prev || 0) + 1))
+        setCalled((prev) => (prev === 2 ? 0 : (prev || 0) + 1))
       }
     }
   }
@@ -44,19 +64,21 @@ const RadioButton = ({
       <div
         ref={divRef}
         role="radio"
-        aria-checked={isSelected}
+        aria-checked={isActive}
         tabIndex={tabIndex}
         className="radio-container"
         onClick={() => {
-          setSelected(index)
+          setCalled(index)
         }}
         onKeyDown={handleKeyDown}
       >
         <Flex alignItems="center" gap={gap[variant]} height={`${currDim}px`}>
           <RadioButtonSvg
             index={index}
-            selected={selected}
-            isSelected={isSelected}
+            active={active}
+            isCalled={isCalled}
+            isActive={isActive}
+            setActive={setActive}
             dim={currDim}
             id={makeId(label)}
           />
