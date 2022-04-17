@@ -2,7 +2,11 @@ import gsap from 'gsap'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { usePrevious } from 'react-use'
 
+import { radioButtonColor } from '@styles/colors'
+
 import { Status } from './type'
+
+const { accent, neutral200, neutral100 } = radioButtonColor
 
 interface Props {
   isSelected: boolean
@@ -25,7 +29,7 @@ const Door = ({ type, isSelected, setStatus, status }: Props) => {
     }
     if (!prevIsSelected && isSelected) {
       gsap.to(buttonTypes[type], {
-        fill: '#FFF200',
+        fill: accent,
         duration: 0.2,
         onComplete: () => {
           setStatus('transition')
@@ -34,7 +38,7 @@ const Door = ({ type, isSelected, setStatus, status }: Props) => {
     }
     if (prevIsSelected && !isSelected) {
       gsap.to([buttonUpRef.current, buttonDownRef.current], {
-        fill: '#58595B',
+        fill: neutral200,
         duration: 0.2,
       })
     }
@@ -43,7 +47,7 @@ const Door = ({ type, isSelected, setStatus, status }: Props) => {
   useEffect(() => {
     if (isSelected && status === 'transition') {
       gsap.to([buttonUpRef.current, buttonDownRef.current], {
-        fill: '#58595B',
+        fill: neutral200,
         duration: 0.2,
         delay: 1,
       })
@@ -78,8 +82,8 @@ const Door = ({ type, isSelected, setStatus, status }: Props) => {
         y="2.9"
         width="58.9"
         height="117.78"
-        fill="#939598"
-        stroke="#58595b"
+        fill={neutral100}
+        stroke={neutral200}
         strokeLinejoin="round"
       />
       <g ref={rightDoorRef}>
@@ -88,23 +92,23 @@ const Door = ({ type, isSelected, setStatus, status }: Props) => {
           y="3.8"
           width="58.9"
           height="117.78"
-          fill="#939598"
-          stroke="#58595b"
+          fill={neutral100}
+          stroke={neutral200}
           strokeLinejoin="round"
         />
         <polygon
           ref={buttonUpRef}
           points="90 45.4 79.2 59.4 100.8 59.4 90 45.4"
-          fill="#58595b"
-          stroke="#58595b"
+          fill={neutral200}
+          stroke={neutral200}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <polygon
           ref={buttonDownRef}
           points="90 79.3 100.8 65.3 79.2 65.3 90 79.3"
-          fill="#58595b"
-          stroke="#58595b"
+          fill={neutral200}
+          stroke={neutral200}
           strokeLinecap="round"
           strokeLinejoin="round"
         />

@@ -3,6 +3,10 @@ import { useEffect } from 'react'
 import { random } from 'lodash'
 import gsap from 'gsap'
 
+import { radioButtonColor } from '@styles/colors'
+
+const { primary, black, white } = radioButtonColor
+
 const moveBrows = () => {
   const tl = gsap.timeline({ repeat: Infinity, repeatDelay: random(1.0, 4.0) })
   tl.to('.brow', {
@@ -100,7 +104,7 @@ const Face = () => {
         cx="61.8"
         cy="61.8"
         r="47.7"
-        fill="#27aae1"
+        fill={primary}
         opacity="0.75"
       />
       <circle
@@ -108,8 +112,8 @@ const Face = () => {
         cx="89.3"
         cy="61.9"
         r="18.1"
-        fill="#fff"
-        stroke="#231f20"
+        fill={white}
+        stroke={black}
         strokeMiterlimit="10"
       />
       <circle
@@ -117,15 +121,15 @@ const Face = () => {
         cx="89.3"
         cy="61.9"
         r="12"
-        fill="#231f20"
+        fill={black}
       />
       <circle
         className="eyeOpen"
         cx="34.8"
         cy="61.9"
         r="18.1"
-        fill="#fff"
-        stroke="#231f20"
+        fill={white}
+        stroke={black}
         strokeMiterlimit="10"
       />
       <circle
@@ -133,13 +137,13 @@ const Face = () => {
         cx="34.8"
         cy="61.9"
         r="12"
-        fill="#231f20"
+        fill={black}
       />
       <path
         className="eyeClosed"
         d="M71.2,61.9a18.1,18.1,0,0,1,36.2,0"
         fill="none"
-        stroke="#231f20"
+        stroke={black}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="2"
@@ -149,7 +153,7 @@ const Face = () => {
         className="eyeClosed"
         d="M16.6,61.9a18.2,18.2,0,0,1,36.3,0"
         fill="none"
-        stroke="#231f20"
+        stroke={black}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="2"
@@ -159,7 +163,7 @@ const Face = () => {
         className={classNames('brow', 'browUp')}
         d="M84,36.3s-5.1-5.8-11,0"
         fill="none"
-        stroke="#231f20"
+        stroke={black}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="2"
@@ -168,7 +172,7 @@ const Face = () => {
         className={classNames('brow', 'browUp')}
         d="M51.1,35.5s-5-5.8-11,0"
         fill="none"
-        stroke="#231f20"
+        stroke={black}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="2"
@@ -177,7 +181,7 @@ const Face = () => {
         id="mouth"
         d="M54.3,82.9s6.9,8,15.1,0"
         fill="none"
-        stroke="#231f20"
+        stroke={black}
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="2"

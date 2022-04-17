@@ -1,3 +1,4 @@
+import { radioButtonColor } from '@styles/colors'
 import { useState } from 'react'
 import { usePrevious } from 'react-use'
 
@@ -17,7 +18,7 @@ const RadioButtonSvg = ({ index, selected, dim, isSelected }: Props) => {
   const [status, setStatus] = useState<Status>('door')
   const prevSelected = usePrevious(selected)
   return (
-    <svg width={dim} viewBox="0 0 123.7 123.7">
+    <svg width={dim} height={dim} viewBox="0 0 123.7 123.7">
       <defs>
         <clipPath id="clip-path">
           <circle cx="61.8" cy="61.8" r="58" fill="none" />
@@ -40,7 +41,7 @@ const RadioButtonSvg = ({ index, selected, dim, isSelected }: Props) => {
           cy="61.8"
           r="58"
           fill="none"
-          stroke="#231f20"
+          stroke={radioButtonColor.black}
           strokeMiterlimit="10"
           strokeWidth="5"
         />

@@ -3,6 +3,8 @@ import { KeyboardEvent, useEffect, useRef } from 'react'
 import { Flex } from '@components/atoms/Flex'
 import { Label } from '@components/atoms/Label'
 import { RadioButtonSvg } from '@components/atoms/svg/RadioButtonSvg'
+import { space } from '@styles/space'
+import { radioButtonColor } from '@styles/colors'
 
 import { getTabIndex } from './utils'
 import { Props } from './types'
@@ -64,6 +66,21 @@ const RadioButton = ({
         .radio-container {
           width: 100%;
           cursor: pointer;
+          outline: none;
+          position: relative;
+        }
+        .radio-container:focus-visible::before {
+          content: '';
+          left: calc(-${currDim / 8}px - ${space[gap[variant]]}px);
+          top: 50%;
+          border: solid transparent;
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+          border-left-color: ${radioButtonColor.primary};
+          border-width: ${currDim / 4}px;
+          margin-top: -${currDim / 4}px;
         }
       `}</style>
     </>

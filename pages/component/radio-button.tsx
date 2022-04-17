@@ -40,7 +40,7 @@ const LikeButtonPage = () => {
   return (
     <>
       <div className="fullScreen">
-        <Flex width="500px" alignItems="center" gap={2}>
+        <Flex width="400px" alignItems="center" gap={3}>
           <RadioGroup labeledById="ElevatorOne">
             {firstRadios.map(({ label }, i) => (
               <RadioButton

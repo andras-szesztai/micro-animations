@@ -8,7 +8,7 @@ interface Props {
 
 const Label = ({ text, size }: Props) => (
   <>
-    <span>{text}</span>
+    <span className="label">{text}</span>
     <style jsx>{`
       font-weight: ${fontWeight.medium};
       user-select: none;
