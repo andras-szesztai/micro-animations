@@ -33,7 +33,6 @@ const secondRadios = [
 // TODO
 // Figure out bug when changing quickly
 // Finish setting up labeledById
-// Fix arrows onKeyDown
 
 const LikeButtonPage = () => {
   const [firstGroupIndex, setFirstGroupIndex] = useState<number>(undefined)

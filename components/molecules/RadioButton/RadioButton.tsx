@@ -1,44 +1,12 @@
-import { Dispatch, SetStateAction, useRef } from 'react'
-import { isUndefined } from 'lodash'
+import { KeyboardEvent, useEffect, useRef } from 'react'
 
 import { Flex } from '@components/atoms/Flex'
 import { Label } from '@components/atoms/Label'
 import { RadioButtonSvg } from '@components/atoms/svg/RadioButtonSvg'
 
-type Variant = 'sm' | 'md' | 'lg'
-
-interface Props {
-  setSelected: Dispatch<SetStateAction<number>>
-  selected: number
-  index: number
-  label: string
-  variant?: Variant
-}
-
-const gap = {
-  sm: 1,
-  md: 2,
-  lg: 3,
-} as const
-
-const dim = {
-  sm: 24,
-  md: 36,
-  lg: 48,
-}
-
-const fontSizes = {
-  sm: 75,
-  md: 125,
-  lg: 150,
-} as const
-
-const getTabIndex = (index: number, selected?: number) => {
-  if (isUndefined(selected)) {
-    return index === 0 ? 0 : -1
-  }
-  return selected === index ? 0 : -1
-}
+import { getTabIndex } from './utils'
+import { Props } from './types'
+import { gap, dim, fontSize } from './styles'
 
 const RadioButton = ({
   selected,
@@ -51,30 +19,36 @@ const RadioButton = ({
   const isSelected = selected === index
   const tabIndex = getTabIndex(index, selected)
   const divRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (isSelected) {
+      divRef.current.focus()
+    }
+  }, [isSelected])
+  const handleKeyDown = ({ code }: KeyboardEvent) => {
+    if (document.activeElement === divRef.current) {
+      if (code.match(/space/i)) {
+        setSelected(index)
+      }
+      if (code.match(/arrowleft|arrowup/i)) {
+        setSelected((prev) => (!prev ? 2 : (prev || 0) - 1))
+      }
+      if (code.match(/arrowright|arrowdown/i)) {
+        setSelected((prev) => (prev === 2 ? 0 : (prev || 0) + 1))
+      }
+    }
+  }
   return (
     <>
       <div
         ref={divRef}
         role="radio"
-        className="radio-container"
+        aria-checked={isSelected}
         tabIndex={tabIndex}
+        className="radio-container"
         onClick={() => {
           setSelected(index)
         }}
-        onKeyDown={({ code }) => {
-          if (document.activeElement === divRef.current) {
-            if (code.match(/space/i)) {
-              setSelected(index)
-            }
-            if (code.match(/arrowleft|arrowup/i)) {
-              setSelected((prev) => (prev === 0 ? 2 : prev - 1))
-            }
-            if (code.match(/arrowright|arrowdown/i)) {
-              setSelected((prev) => (prev === 2 ? 0 : prev + 1))
-            }
-          }
-        }}
-        aria-checked={isSelected}
+        onKeyDown={handleKeyDown}
       >
         <Flex alignItems="center" gap={gap[variant]} height={`${currDim}px`}>
           <RadioButtonSvg
@@ -83,12 +57,13 @@ const RadioButton = ({
             isSelected={isSelected}
             dim={currDim}
           />
-          <Label text={label} size={fontSizes[variant]} />
+          <Label text={label} size={fontSize[variant]} />
         </Flex>
       </div>
       <style jsx>{`
         .radio-container {
           width: 100%;
+          cursor: pointer;
         }
       `}</style>
     </>
