@@ -9,6 +9,8 @@ export const fontSize = {
   300: '3rem',
   350: '3.5rem',
   400: '4rem',
-  4.5: '4.5rem',
-  5: '5rem',
-}
+  450: '4.5rem',
+  500: '5rem',
+} as const
+
+export type TFontSize = keyof typeof fontSize

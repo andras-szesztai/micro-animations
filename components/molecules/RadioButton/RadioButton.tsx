@@ -59,7 +59,11 @@ const RadioButton = ({
             isSelected={isSelected}
             dim={currDim}
           />
-          <Label text={label} size={fontSize[variant]} />
+          <Label
+            text={label}
+            size={fontSize[variant]}
+            color={radioButtonColor.black}
+          />
         </Flex>
       </div>
       <style jsx>{`
@@ -68,17 +72,19 @@ const RadioButton = ({
           cursor: pointer;
           outline: none;
           position: relative;
+          padding: ${space[gap[variant]]}px;
+          padding-left: 0px;
         }
         .radio-container:focus-visible::before {
           content: '';
-          left: calc(-${currDim / 8}px - ${space[gap[variant]]}px);
+          left: calc(-${currDim / 4}px - ${space[gap[variant]]}px);
           top: 50%;
           border: solid transparent;
           height: 0;
           width: 0;
           position: absolute;
           pointer-events: none;
-          border-left-color: ${radioButtonColor.primary};
+          border-left-color: ${radioButtonColor.neutral200};
           border-width: ${currDim / 4}px;
           margin-top: -${currDim / 4}px;
         }
