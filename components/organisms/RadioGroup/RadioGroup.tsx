@@ -4,10 +4,11 @@ import {
   TRadioOption,
   TRadioVariant,
 } from '@components/molecules/RadioButton/types'
+import { Flex } from '@components/atoms/Flex'
+import { Title } from '@components/atoms/Title'
 import { radioButtonColor } from '@styles/colors'
 
-import { Flex } from '../../atoms/Flex'
-import { Title } from '../../atoms/Title'
+import { gap, titleType } from './styles'
 
 interface Props {
   labeledById: string
@@ -17,18 +18,6 @@ interface Props {
   initialActive?: number
   onChange: (val: string) => void
 }
-
-const gap = {
-  sm: 2,
-  md: 3,
-  lg: 4,
-} as const
-
-const titleType = {
-  sm: 'h6',
-  md: 'h4',
-  lg: 'h3',
-} as const
 
 const RadioGroup = ({
   labeledById,
@@ -52,18 +41,18 @@ const RadioGroup = ({
         </Title>
         {options.map((option, i) => (
           <RadioButton
+            index={i}
             key={option.label}
             option={option}
             maxIndex={options.length - 1}
-            index={i}
             called={called}
             setCalled={setCalled}
             active={active}
-            variant={variant}
             setActive={(index: number) => {
               setActive(index)
               onChange(option.value || option.label)
             }}
+            variant={variant}
           />
         ))}
       </Flex>

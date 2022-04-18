@@ -21,8 +21,6 @@ const firstRadios = [
   },
 ]
 
-// TODO
-// Disabled state
 // Testing (unit & cypress)
 // Husky, commitlint
 
