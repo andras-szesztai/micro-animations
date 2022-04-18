@@ -25,28 +25,28 @@ const Title: FC<Props> = ({ as, children, size, weight, id, color }) => {
           color: ${color};
         }
         h1 {
-          font-size: ${fontSize[size || 250]};
-          font-weight: ${fontWeight[weight || 'bold']};
+          font-size: ${fontSize[size]};
+          font-weight: ${fontWeight[weight]};
         }
         h2 {
-          font-size: ${fontSize[size || 200]};
-          font-weight: ${fontWeight[weight || 'bold']};
+          font-size: ${fontSize[size]};
+          font-weight: ${fontWeight[weight]};
         }
         h3 {
-          font-size: ${fontSize[size || 175]};
-          font-weight: ${fontWeight[weight || 'bold']};
+          font-size: ${fontSize[size]};
+          font-weight: ${fontWeight[weight]};
         }
         h4 {
-          font-size: ${fontSize[size || 150]};
-          font-weight: ${fontWeight[weight || 'medium']};
+          font-size: ${fontSize[size]};
+          font-weight: ${fontWeight[weight]};
         }
         h5 {
-          font-size: ${fontSize[size || 125]};
-          font-weight: ${fontWeight[weight || 'medium']};
+          font-size: ${fontSize[size]};
+          font-weight: ${fontWeight[weight]};
         }
         h6 {
-          font-size: ${fontSize[size || 100]};
-          font-weight: ${fontWeight[weight || 'medium']};
+          font-size: ${fontSize[size]};
+          font-weight: ${fontWeight[weight]};
         }
       `}</style>
     </>

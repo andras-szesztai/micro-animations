@@ -10,4 +10,17 @@ const firstRadios = [
   },
 ]
 
-export { firstRadios }
+const secondRadios = [
+  {
+    label: 'Second floor',
+  },
+  {
+    label: 'First floor',
+    disabled: true,
+  },
+  {
+    label: 'Ground floor',
+  },
+]
+
+export { firstRadios, secondRadios }

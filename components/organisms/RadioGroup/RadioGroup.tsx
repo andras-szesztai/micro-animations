@@ -36,6 +36,7 @@ const RadioGroup = ({
           as={titleType[variant]}
           id={`radioGroupLabel${labeledById}`}
           color={radioButtonColor.black}
+          weight="medium"
         >
           {title}
         </Title>
