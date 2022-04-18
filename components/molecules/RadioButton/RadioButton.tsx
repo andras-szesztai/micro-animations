@@ -12,6 +12,7 @@ import { RadioButtonSvg } from '@components/atoms/svg/RadioButtonSvg'
 import { space } from '@styles/space'
 import { radioButtonColor } from '@styles/colors'
 
+import { useMount } from 'react-use'
 import { getTabIndex, makeId } from './utils'
 import { gap, dim, fontSize } from './styles'
 import { TRadioOption, TRadioVariant } from './types'
@@ -45,11 +46,15 @@ const RadioButton = ({
   const isCalled = called === index
   const tabIndex = getTabIndex(index, active)
   const divRef = useRef<HTMLDivElement>(null)
+  const afterFirstMount = useRef(false)
   useEffect(() => {
-    if (isCalled) {
+    if (isCalled && afterFirstMount.current) {
       divRef.current.focus()
     }
   }, [isCalled])
+  useMount(() => {
+    afterFirstMount.current = true
+  })
   const handleKeyDown = ({ code }: KeyboardEvent) => {
     if (document.activeElement === divRef.current) {
       if (code.match(/space/i) && !disabled) {

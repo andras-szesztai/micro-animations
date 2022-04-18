@@ -12,6 +12,10 @@ export const space = {
   10: 40,
   11: 44,
   12: 48,
+  13: 52,
+  14: 56,
+  15: 60,
+  16: 64,
 } as const
 
 export type TSpace = keyof typeof space

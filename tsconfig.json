@@ -24,6 +24,7 @@
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"],
       "@hooks/*": ["hooks/*"],
+      "@data/*": ["data/*"],
     }
   },
   "include": [
