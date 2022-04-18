@@ -14,8 +14,17 @@ const firstRadios = [
   },
   {
     label: 'First floor',
+    disabled: true,
+  },
+  {
+    label: 'Ground floor',
   },
 ]
+
+// TODO
+// Disabled state
+// Testing (unit & cypress)
+// Husky, commitlint
 
 const RadioButtonPage = () => {
   const [, setSelected] = useState<string | undefined>(undefined)

@@ -12,9 +12,17 @@ interface Props {
   index: number
   setActive: Dispatch<SetStateAction<number>>
   active: number
+  disabled: boolean
 }
 
-const Door = ({ isCalled, setActive, index, isActive, active }: Props) => {
+const Door = ({
+  isCalled,
+  setActive,
+  index,
+  isActive,
+  active,
+  disabled,
+}: Props) => {
   const prevActive = usePrevious(active)
   const type = prevActive < index ? 'down' : 'up'
   const buttonUpRef = useRef<SVGPolygonElement>(null)
@@ -25,7 +33,7 @@ const Door = ({ isCalled, setActive, index, isActive, active }: Props) => {
   // Call elevator
   useEffect(() => {
     const tl = gsap.timeline()
-    if (isCalled) {
+    if (isCalled && !disabled) {
       const button = type === 'up' ? buttonUpRef.current : buttonDownRef.current
       tl.to(button, {
         fill: accent,
@@ -47,7 +55,7 @@ const Door = ({ isCalled, setActive, index, isActive, active }: Props) => {
         duration: 0.2,
       })
     }
-  }, [isCalled, type, setActive, index])
+  }, [isCalled, type, setActive, index, disabled])
 
   useEffect(() => {
     if (isCalled && isActive) {

@@ -14,17 +14,19 @@ import { radioButtonColor } from '@styles/colors'
 
 import { getTabIndex, makeId } from './utils'
 import { gap, dim, fontSize } from './styles'
+import { TRadioOption, TRadioVariant } from './types'
 
-type Variant = 'sm' | 'md' | 'lg'
+const { neutral100, neutral200, black } = radioButtonColor
 
-export interface Props {
+interface Props {
   active: number
   setActive: Dispatch<SetStateAction<number>>
   called: number
   setCalled: Dispatch<SetStateAction<number>>
   index: number
-  label: string
-  variant?: Variant
+  option: TRadioOption
+  variant?: TRadioVariant
+  maxIndex?: number
 }
 
 const RadioButton = ({
@@ -34,8 +36,10 @@ const RadioButton = ({
   setActive,
   index,
   variant,
-  label,
+  option,
+  maxIndex,
 }: Props) => {
+  const { label, disabled } = option
   const currDim = dim[variant]
   const isActive = active === index
   const isCalled = called === index
@@ -48,14 +52,14 @@ const RadioButton = ({
   }, [isCalled])
   const handleKeyDown = ({ code }: KeyboardEvent) => {
     if (document.activeElement === divRef.current) {
-      if (code.match(/space/i)) {
+      if (code.match(/space/i) && !disabled) {
         setCalled(index)
       }
       if (code.match(/arrowleft|arrowup/i)) {
-        setCalled((prev) => (!prev ? 2 : (prev || 0) - 1))
+        setCalled((prev) => (!prev ? maxIndex : (prev || 0) - 1))
       }
       if (code.match(/arrowright|arrowdown/i)) {
-        setCalled((prev) => (prev === 2 ? 0 : (prev || 0) + 1))
+        setCalled((prev) => (prev === maxIndex ? 0 : (prev || 0) + 1))
       }
     }
   }
@@ -64,11 +68,14 @@ const RadioButton = ({
       <div
         ref={divRef}
         role="radio"
+        aria-disabled={disabled}
         aria-checked={isActive}
         tabIndex={tabIndex}
         className="radio-container"
         onClick={() => {
-          setCalled(index)
+          if (!disabled) {
+            setCalled(index)
+          }
         }}
         onKeyDown={handleKeyDown}
       >
@@ -81,21 +88,21 @@ const RadioButton = ({
             setActive={setActive}
             dim={currDim}
             id={makeId(label)}
+            disabled={disabled}
           />
           <Label
             text={label}
             size={fontSize[variant]}
-            color={radioButtonColor.black}
+            color={disabled ? neutral100 : black}
           />
         </Flex>
       </div>
       <style jsx>{`
         .radio-container {
           width: 100%;
-          cursor: pointer;
+          cursor: ${disabled ? 'not-allowed' : 'pointer'};
           outline: none;
           position: relative;
-          padding: ${space[gap[variant]]}px;
           padding-left: 0px;
         }
         .radio-container:focus-visible::before {
@@ -107,7 +114,7 @@ const RadioButton = ({
           width: 0;
           position: absolute;
           pointer-events: none;
-          border-left-color: ${radioButtonColor.neutral200};
+          border-left-color: ${disabled ? neutral100 : neutral200};
           border-width: ${currDim / 4}px;
           margin-top: -${currDim / 4}px;
         }
@@ -118,6 +125,7 @@ const RadioButton = ({
 
 RadioButton.defaultProps = {
   variant: 'md',
+  maxIndex: 0,
 }
 
 export default RadioButton

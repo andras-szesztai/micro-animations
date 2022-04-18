@@ -4,6 +4,7 @@ import { radioButtonColor } from '@styles/colors'
 
 import Door from './Door'
 import Face from './Face'
+import OutOfOrder from './OutOfOrder'
 
 interface Props {
   active: number
@@ -13,6 +14,7 @@ interface Props {
   isActive: boolean
   setActive: Dispatch<SetStateAction<number>>
   id: string
+  disabled: boolean
 }
 
 const RadioButtonSvg = ({
@@ -23,6 +25,7 @@ const RadioButtonSvg = ({
   id,
   isActive,
   setActive,
+  disabled,
 }: Props) => {
   return (
     <svg width={dim} height={dim} viewBox="0 0 123.7 123.7">
@@ -39,7 +42,9 @@ const RadioButtonSvg = ({
           isActive={isActive}
           setActive={setActive}
           index={index}
+          disabled={disabled}
         />
+        {disabled && <OutOfOrder />}
       </g>
       <circle
         cx="61.8"
