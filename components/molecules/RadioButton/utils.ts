@@ -7,6 +7,6 @@ const getTabIndex = (index: number, selected?: number) => {
   return selected === index ? 0 : -1
 }
 
-const makeId = (id: string) => id.toLowerCase().replaceAll(' ', '')
+const makeId = (id: string) => id.toLowerCase().replace(/ /g, '')
 
 export { getTabIndex, makeId }
