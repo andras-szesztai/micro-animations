@@ -4,6 +4,7 @@ export const fontSize = {
   100: '1rem',
   125: '1.25rem',
   150: '1.5rem',
+  175: '1.5rem',
   200: '2rem',
   250: '2.5rem',
   300: '3rem',

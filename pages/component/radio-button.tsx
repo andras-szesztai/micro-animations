@@ -3,8 +3,6 @@ import { useState } from 'react'
 import { RadioGroup } from '@components/organisms/RadioGroup'
 import { Flex } from '@components/atoms/Flex'
 
-import { space } from '@styles/space'
-
 const firstRadios = [
   {
     label: 'Third floor',
@@ -22,7 +20,6 @@ const firstRadios = [
 ]
 
 // Testing (unit & cypress)
-// Husky, commitlint
 
 const RadioButtonPage = () => {
   const [, setSelected] = useState<string | undefined>(undefined)
@@ -41,13 +38,6 @@ const RadioButtonPage = () => {
         </Flex>
       </div>
       <style jsx>{`
-        button {
-          width: 100px;
-          height: 20px;
-          cursor: pointer;
-          padding: ${space[4]}px;
-          border-radius: ${space[2]}px;
-        }
         .fullScreen {
           position: relative;
           width: 100vw;

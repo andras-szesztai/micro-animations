@@ -8,7 +8,7 @@ const dim = {
   sm: 24,
   md: 36,
   lg: 48,
-}
+} as const
 
 const fontSize = {
   sm: 75,
