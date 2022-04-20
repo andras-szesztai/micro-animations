@@ -10,8 +10,8 @@ import { fontSize } from '@styles/fontSize'
 const { neutral700, white, black } = mainColor
 
 // TODO
+// Style table for props in documentation
 // Cypress & unit tests
-// Global styling using this
 // Finish Radio component documentation
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
